@@ -67,8 +67,9 @@ pretty = {
 # ---------------- Sidebar controls ----------------
 with st.sidebar:
     st.header("Display Options")
-    max_n = int(min(60, len(agg)))
-    n_towns = st.slider("Heatmap: number of towns", min_value=10, max_value=max_n, value=min(30, max_n), step=5)
+    # allow 1..30 towns on the heatmap
+    max_n = int(min(30, len(agg)))
+    n_towns = st.slider("Heatmap: number of towns", min_value=1, max_value=max_n, value=max_n, step=1)
     name_filter = st.text_input("Filter towns by name", "")
 
 # Apply optional filter (affects both charts)
@@ -121,7 +122,7 @@ st.markdown("#### Insights:")
 st.markdown(
     """
 - **Trablous stands out**: it has far more facilities than many towns, mostly pharmacies and clinics.
-- **Medical centers are not everywhere**: the pink/medical-centers presence is noticeable only in a few towns 
+- **Medical centers are not everywhere**: medical centers appear only in a few towns.
 - **Same mix in most towns**: pharmacies are usually the largest part, clinics come next, and hospitals are the smallest.  
   → This suggests strong outpatient access but limited inpatient capacity at the town level.
 """
